@@ -12,6 +12,8 @@ import java.util.ArrayList;
 
 public class ContactsActivity extends AppCompatActivity implements OnFragmentInteractionListener {
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
