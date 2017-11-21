@@ -1,11 +1,8 @@
 package com.example.zero.inclass11.fragments;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.app.Fragment;
 import android.util.Log;
@@ -81,46 +78,25 @@ public class CreateContactFragment extends Fragment {
                 Contact u = new Contact(etxtFirstName.getText().toString()+" "+etxtLastName.getText().toString(),etxtEmail.getText().toString(),
                         etxtPhone.getText().toString(),byteArray,user.getUid());
 
-                String userID=databaseReference.push().getKey();
-
-
-                databaseReference.child(user.getUid()).setValue(u);
-
-                // Sign in success, update UI with the signed-in user's information
-                Log.d("JOSIAH FARGMENT COOL", "createUserWithEmail:success");
-
-
-                mListener.gotoNextFragment(FragmentAction.FROM_CREATE_CONTACT_GO_TO_SUBMIT_CONTACT);
-            }
-        });
-
 
     }
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            if (requestCode == CAMERA_CODE) {
-                Bitmap image = (Bitmap) data.getExtras().get("data");//from Camera
-                image = image.createScaledBitmap(image, 750, 750, false);
-                imgBtnProfilePhoto.setImageBitmap(image);
-                //   ImageSaver.saveImage(userNameSignUp.getText().toString(),image,(MainActivity) (getActivity()));
-
-
-
-                if (image != null) {
-                    picture=image;
-                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    image.compress(Bitmap.CompressFormat.PNG, 10, stream);
-                    byteArray = stream.toByteArray();
-
-
-
+            btnCancel = getView().findViewById(R.id.btnCancel);
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mListener.gotoNextFragment(FragmentAction.FROM_CANCEL_CONTACT_GO_TO_CONTACTS);
                 }
+            });
 
-            }
+            btnSave = getView().findViewById(R.id.btnSave);
+        btnSave.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mListener.gotoNextFragment(FragmentAction.FROM_CREATE_CONTACT_GO_TO_SUBMIT_CONTACT);
+                }
+            });
+
         }
-    }
 
     @Override
     public void onAttach(Context context) {

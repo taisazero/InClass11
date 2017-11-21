@@ -85,13 +85,30 @@
                 android:singleLine="true"
                 android:textAppearance="@android:style/TextAppearance.Material.Large" />
 
-            <Button
-                android:id="@+id/btnSave"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginBottom="30dp"
-                android:text="Save" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnSave"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_marginBottom="30dp"
+                    android:layout_weight="1"
+                    android:text="Save" />
+
+                <Button
+                    android:id="@+id/btnCancel"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_marginBottom="30dp"
+                    android:layout_weight="1"
+                    android:text="Cancel" />
+
+            </LinearLayout>
 
         </LinearLayout>
+
     </ScrollView>
 </android.support.constraint.ConstraintLayout>
