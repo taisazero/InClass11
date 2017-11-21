@@ -8,6 +8,7 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.zero.inclass11.R;
 
@@ -15,6 +16,9 @@ import com.example.zero.inclass11.R;
 public class CreateContactFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
+
+    Button btnCancel;
+    Button btnSave;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,22 @@ public class CreateContactFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+
+        btnCancel = getView().findViewById(R.id.btnCancel);
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.gotoNextFragment(FragmentAction.FROM_CANCEL_CONTACT_GO_TO_CONTACTS);
+            }
+        });
+
+        btnSave = getView().findViewById(R.id.btnSave);
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.gotoNextFragment(FragmentAction.FROM_CREATE_CONTACT_GO_TO_SUBMIT_CONTACT);
+            }
+        });
 
     }
 

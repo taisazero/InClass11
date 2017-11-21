@@ -51,6 +51,12 @@ public class ContactsActivity extends AppCompatActivity implements OnFragmentInt
                     .replace(R.id.container, new ContactsFragment(), "contactsFragment")
                     .addToBackStack(null)
                     .commit();
+        }else if (action == FragmentAction.FROM_CREATE_CONTACT_GO_TO_SUBMIT_CONTACT) {
+            // TODO add constructor to the contacts fragment
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.container, new ContactsFragment(), "contactsFragment")
+                    .addToBackStack(null)
+                    .commit();
         }
     }
 
