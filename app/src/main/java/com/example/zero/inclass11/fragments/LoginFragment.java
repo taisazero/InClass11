@@ -193,7 +193,7 @@ public class LoginFragment extends Fragment {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("Google", "signInWithCredential:success");
                             FirebaseUser user = MainActivity.mAuth.getCurrentUser();
-                            Toast.makeText(getActivity(), "Authentication Sucessful.",
+                            Toast.makeText(getActivity(), "Authentication Successful.",
                                     Toast.LENGTH_SHORT).show();
                             updateUI(user);//hi
                         } else {
