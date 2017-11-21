@@ -16,6 +16,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInApi;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
 
     Button signUp;
     Button login;
-    Button googleSign;
+    SignInButton googleSign;
     EditText password;
     EditText email;
     private FirebaseAuth mAuth;
@@ -47,13 +48,12 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.test);
+        setContentView(R.layout.activity_main);
 
         getFragmentManager().beginTransaction()
                 .replace(R.id.container, new LoginFragment(), "loginFragment")
                 .addToBackStack(null)
                 .commit();
-        setContentView(R.layout.test);
         mAuth=FirebaseAuth.getInstance();
 
 
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
         email=findViewById(R.id.editEmail);
         signUp=findViewById(R.id.btnSignUpNav);
         login=findViewById(R.id.btnLogin);
-        googleSign=findViewById(R.id.googleSign);
+        googleSign= (SignInButton)findViewById(R.id.googleSign);
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
