@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import com.example.zero.inclass11.R;
 
 public class ContactsFragment extends Fragment {
 
+    public static final String TAG = "onActivityCreated";
     private OnFragmentInteractionListener mListener;
     private RecyclerView listContacts;
     private LinearLayoutManager linearLayoutManager;
@@ -43,7 +45,9 @@ public class ContactsFragment extends Fragment {
         contactAdapter = new ContactAdapter(Contact.contacts, new ContactAdapter.OnItemClickListener() {
             @Override
             public void setOnClickDeleteListener(Contact contact, int position) {
-                Contact.contacts.remove(position);
+                Log.d(TAG, "setOnClickDeleteListener: contacts is: " + Contact.contacts.toString());
+                contactAdapter.contacts.remove(position);
+                contactAdapter.notifyDataSetChanged();
             }
 
             @Override

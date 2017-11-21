@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHolder> {
 
     public static final String TAG = "ContactAdapter:onBindViewHolder";
-    private ArrayList<Contact> contacts;
+    public ArrayList<Contact> contacts;
     public OnItemClickListener listener;
 
     public ContactAdapter(ArrayList<Contact> contacts, OnItemClickListener listener) {
