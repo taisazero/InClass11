@@ -43,6 +43,9 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
         holder.txtName.setText(contact.getName());
         holder.txtEmail.setText(contact.getEmail());
         holder.txtPhone.setText(contact.getPhone());
+        if (contact.getProfilePic() == null) {
+            contact.setProfilePic(new byte[2]);
+        }
         Bitmap bitmap = BitmapFactory.decodeByteArray(contact.getProfilePic(), 0, contact.getProfilePic().length);
         holder.imgProfile.setImageBitmap(bitmap);
 
