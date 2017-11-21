@@ -220,13 +220,15 @@ public class LoginFragment extends Fragment {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("Google", "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            Toast.makeText(getActivity(), "Authentication Sucessful.",
+                                    Toast.LENGTH_SHORT).show();
                             updateUI(user);//hi
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("Google", "signInWithCredential:failure", task.getException());
                             Toast.makeText(getActivity(), "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-                            updateUI(null);
+
                         }
 
                         // ...
@@ -237,7 +239,7 @@ public class LoginFragment extends Fragment {
 
 
     private void updateUI(Object o) {
-        //Todo
+        //Todo Josiah go to Contact fragment
     }
 
 
