@@ -7,6 +7,8 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.example.zero.inclass11.R;
 
@@ -18,6 +20,17 @@ import com.example.zero.inclass11.R;
 public class SignUpFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
+
+    public static boolean flagCancel = false;
+    public static boolean flagSignUp = false;
+
+    public static Button btnCancel;
+    public static Button btnSignUp;
+    public static EditText editFirstName;
+    public static EditText editLastName;
+    public static EditText editEmail;
+    public static EditText editPassword;
+    public static EditText editPasswordRepeat;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,6 +47,38 @@ public class SignUpFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        editFirstName = getView().findViewById(R.id.editFirstName);
+        editLastName = getView().findViewById(R.id.editLastName);
+        editEmail = getView().findViewById(R.id.editUserNameSignUp);
+        editPassword = getView().findViewById(R.id.editPasswordSignUp);
+        editPasswordRepeat = getView().findViewById(R.id.editPasswordRepeat);
+
+        btnCancel = getView().findViewById(R.id.btnCancel);
+        btnSignUp = getView().findViewById(R.id.btnSignup);
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!flagSignUp) {
+                    flagCancel = true;
+                    mListener.gotoNextFragment(FragmentAction.FROM_CANCEL_GO_TO_LOGIN);
+                }
+            }
+        });
+
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!flagCancel) {
+                    flagSignUp = true;
+                    mListener.gotoNextFragment(FragmentAction.FROM_SIGN_UP_GO_TO_LOGIN);
+                }
+            }
+        });
+
+
+
     }
 
     @Override

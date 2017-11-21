@@ -34,6 +34,11 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
                     .replace(R.id.container, new LoginFragment(), "loginFragment")
                     .addToBackStack(null)
                     .commit();
+        } else if (action == FragmentAction.FROM_CANCEL_GO_TO_LOGIN) {
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.container, new LoginFragment(), "loginFragment")
+                    .addToBackStack(null)
+                    .commit();
         }
     }
 
