@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.test);
+        setContentView(R.layout.activity_main);
 
         getFragmentManager().beginTransaction()
                 .replace(R.id.container, new LoginFragment(), "loginFragment")
