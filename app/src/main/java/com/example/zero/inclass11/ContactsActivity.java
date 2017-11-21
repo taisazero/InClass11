@@ -18,7 +18,7 @@ public class ContactsActivity extends AppCompatActivity implements OnFragmentInt
         setContentView(R.layout.activity_contacts);
 
         Contact.contacts = new ArrayList<>();
-        Contact.contacts.add(new Contact("Josiah", "fgtrgr", "543543543", null, "543543543"));
+        Contact.contacts.add(new Contact("Josiah", "fgtrgr", "543543543", null, "543543543"));//hi
 
         getFragmentManager().beginTransaction()
                 .replace(R.id.container, new ContactsFragment(), "contactsFragment")
