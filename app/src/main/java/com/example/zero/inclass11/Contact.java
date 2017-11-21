@@ -5,7 +5,9 @@ import java.util.ArrayList;
 public class Contact {
 
     public static ArrayList<Contact> contacts;
+    public static Contact user;
 
+    public String userId;
     public String name;
     public String email;
     public String phone;
@@ -43,6 +45,14 @@ public class Contact {
         result = 31 * result + (phone != null ? phone.hashCode() : 0);
         result = 31 * result + (id != null ? id.hashCode() : 0);
         return result;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getName() {

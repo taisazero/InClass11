@@ -1,9 +1,9 @@
 package com.example.zero.inclass11.fragments;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,9 +12,7 @@ import android.view.ViewGroup;
 
 import com.example.zero.inclass11.Contact;
 import com.example.zero.inclass11.ContactAdapter;
-import com.example.zero.inclass11.MainActivity;
 import com.example.zero.inclass11.R;
-
 
 public class ContactsFragment extends Fragment {
 
@@ -50,15 +48,13 @@ public class ContactsFragment extends Fragment {
 
             @Override
             public void setOnClickEditListener(Contact contact, int position) {
-
+                mListener.gotoNextFragment(FragmentAction.FROM_CONTACTS_GO_TO_EDIT_CONTACT);
             }
         });
 
         contactAdapter.notifyDataSetChanged();
         listContacts.setLayoutManager(linearLayoutManager);
         listContacts.setAdapter(contactAdapter);
-
-
     }
 
     @Override

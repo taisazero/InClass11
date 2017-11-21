@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.zero.inclass11.ContactsActivity;
 import com.example.zero.inclass11.MainActivity;
 import com.example.zero.inclass11.R;
 import com.google.android.gms.auth.api.Auth;
@@ -33,6 +34,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import static com.example.zero.inclass11.MainActivity.mGoogleSignInClient;
+
 /**
  * @author Josiah Laivins
  * @version 10/23/2017
@@ -41,11 +44,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 public class LoginFragment extends Fragment {
 
 
-    SignInButton googleSign;
-    private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
-    private GoogleApiClient mGoogleSignInClient;
-    private final int RC_SIGN_IN=1;
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -75,28 +74,11 @@ public class LoginFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        MainActivity.googleSign=(SignInButton)getActivity().findViewById(R.id.googleSign);
         btnLogin = getView().findViewById(R.id.btnLogin);
         btnSignUpNav = getView().findViewById(R.id.btnSignUpNav);
         editEmail = getView().findViewById(R.id.editUserName);
         editPassword = getView().findViewById(R.id.editPassword);
-        mAuth=FirebaseAuth.getInstance();
-        googleSign=(SignInButton)getActivity().findViewById(R.id.googleSign);
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-        mGoogleSignInClient = new GoogleApiClient.Builder(getActivity().getApplicationContext())
-                .enableAutoManage((FragmentActivity) getActivity() , new GoogleApiClient.OnConnectionFailedListener() {
-                    @Override
-                    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-                        Toast.makeText(getActivity(),"Connection Failed!",Toast.LENGTH_LONG).show();
-                    }
-                })
-                .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
-                .build();
-
-
-
 
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -141,20 +123,20 @@ public class LoginFragment extends Fragment {
         btnSignUpNav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: Josiah add fragment
+                mListener.gotoNextFragment(FragmentAction.FROM_LOGIN_GO_TO_SIGNUP);
             }
         });
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mAuth.signInWithEmailAndPassword(editEmail.getText().toString(), editPassword.getText().toString())
+                MainActivity.mAuth.signInWithEmailAndPassword(editEmail.getText().toString(), editPassword.getText().toString())
                         .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     // Sign in success, update UI with the signed-in user's information
                                     Log.d("Login", "signInWithEmail:success");
-                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    FirebaseUser user = MainActivity.mAuth.getCurrentUser();
                                     updateUI(user);
                                 } else {
                                     // If sign in fails, display a message to the user.
@@ -170,37 +152,28 @@ public class LoginFragment extends Fragment {
 
             }
         });
-        googleSign.setOnClickListener(new View.OnClickListener() {
+        MainActivity.googleSign.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 signIn();
-
-
             }
         });
     }
 
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleSignInClient);
-        startActivityForResult(signInIntent, RC_SIGN_IN);
+        startActivityForResult(signInIntent, MainActivity.RC_SIGN_IN);
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
+        if (requestCode == MainActivity.RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-
             // Google Sign In was successful, authenticate with Firebase
             GoogleSignInAccount account = result.getSignInAccount();
             firebaseAuthWithGoogle(account);
-
-
-
-
-
         }
         else {
             Toast.makeText(getActivity(),"Sign in Failed",Toast.LENGTH_LONG).show();
@@ -212,14 +185,14 @@ public class LoginFragment extends Fragment {
         Log.d("Google", "firebaseAuthWithGoogle:" + acct.getIdToken());
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
-        mAuth.signInWithCredential(credential)
+        MainActivity.mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("Google", "signInWithCredential:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
+                            FirebaseUser user = MainActivity.mAuth.getCurrentUser();
                             Toast.makeText(getActivity(), "Authentication Sucessful.",
                                     Toast.LENGTH_SHORT).show();
                             updateUI(user);//hi
@@ -239,7 +212,9 @@ public class LoginFragment extends Fragment {
 
 
     private void updateUI(Object o) {
-        //Todo Josiah go to Contact fragment
+        Intent intent = new Intent(getActivity(), ContactsActivity.class);
+        getActivity().startActivity(intent);
+
     }
 
 

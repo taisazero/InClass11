@@ -8,12 +8,17 @@ import com.example.zero.inclass11.fragments.CreateContactFragment;
 import com.example.zero.inclass11.fragments.FragmentAction;
 import com.example.zero.inclass11.fragments.OnFragmentInteractionListener;
 
+import java.util.ArrayList;
+
 public class ContactsActivity extends AppCompatActivity implements OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts);
+
+        Contact.contacts = new ArrayList<>();
+        Contact.contacts.add(new Contact("Josiah", "fgtrgr", "543543543", null, "543543543"));
 
         getFragmentManager().beginTransaction()
                 .replace(R.id.container, new ContactsFragment(), "contactsFragment")
