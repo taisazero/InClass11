@@ -1,8 +1,9 @@
 package com.example.zero.inclass11;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,9 +41,8 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
         holder.txtName.setText(contact.getName());
         holder.txtEmail.setText(contact.getEmail());
         holder.txtPhone.setText(contact.getPhone());
-
-
-
+        Bitmap bitmap = BitmapFactory.decodeByteArray(contact.getProfilePic(), 0, contact.getProfilePic().length);
+        holder.imgProfile.setImageBitmap(bitmap);
     }
 
 
@@ -65,18 +65,16 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
         public TextView txtName;
         public TextView txtEmail;
         public TextView txtPhone;
-        public TextView txtDept;
-        public ImageView imgAvatar;
+        public ImageView imgProfile;
 
 
         public ViewHolder(ConstraintLayout constraintLayout) {
             super(constraintLayout);
-            this.constraintLayout = constraintLayout;/*
-            txtName = constraintLayout.findViewById(R.id.txt);
+            this.constraintLayout = constraintLayout;
+            txtName = constraintLayout.findViewById(R.id.txtItemName);
             txtEmail = constraintLayout.findViewById(R.id.txtItemEmail);
             txtPhone = constraintLayout.findViewById(R.id.txtItemPhone);
-            txtDept = constraintLayout.findViewById(R.id.txtItemDept);
-            imgAvatar = constraintLayout.findViewById(R.id.imgItemAvatar);*/
+            imgProfile = constraintLayout.findViewById(R.id.imgItemProfileImage);
         }
 
         public void bind(final Contact contact, final int position,
