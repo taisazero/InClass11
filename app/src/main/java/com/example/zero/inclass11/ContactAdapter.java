@@ -3,10 +3,12 @@ package com.example.zero.inclass11;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.constraint.ConstraintLayout;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -43,6 +45,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
         holder.txtPhone.setText(contact.getPhone());
         Bitmap bitmap = BitmapFactory.decodeByteArray(contact.getProfilePic(), 0, contact.getProfilePic().length);
         holder.imgProfile.setImageBitmap(bitmap);
+
     }
 
 
@@ -52,7 +55,8 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
     }
 
     public interface OnItemClickListener {
-        void setOnLongClickListener(Contact contact, int position);
+        void setOnClickDeleteListener(Contact contact, int position);
+        void setOnClickEditListener(Contact contact, int position);
     }
 
     // Provide a reference to the views for each data item
@@ -66,7 +70,8 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
         public TextView txtEmail;
         public TextView txtPhone;
         public ImageView imgProfile;
-
+        public ImageButton imgBtnItemDelete;
+        public ImageButton imgBtnItemEditContact;
 
         public ViewHolder(ConstraintLayout constraintLayout) {
             super(constraintLayout);
@@ -75,14 +80,23 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
             txtEmail = constraintLayout.findViewById(R.id.txtItemEmail);
             txtPhone = constraintLayout.findViewById(R.id.txtItemPhone);
             imgProfile = constraintLayout.findViewById(R.id.imgItemProfileImage);
+            imgBtnItemDelete = constraintLayout.findViewById(R.id.imgBtnItemDelete);
+            imgBtnItemEditContact = constraintLayout.findViewById(R.id.imgBtnItemEditContact);
         }
 
         public void bind(final Contact contact, final int position,
                          final OnItemClickListener onItemClickListener) {
-            constraintLayout.setOnClickListener(new View.OnClickListener() {
+            imgBtnItemDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    onItemClickListener.setOnLongClickListener(contact, position);
+                    onItemClickListener.setOnClickDeleteListener(contact, position);
+                }
+            });
+
+            imgBtnItemEditContact.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onItemClickListener.setOnClickEditListener(contact, position);
                 }
             });
         }
