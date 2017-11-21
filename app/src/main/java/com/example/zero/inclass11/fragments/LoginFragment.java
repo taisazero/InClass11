@@ -57,6 +57,7 @@ public class LoginFragment extends Fragment {
 
     public static TextView editEmail;
     public static TextView editPassword;
+    private final String clientID="957157533834-lnh3gs150cldcinaljdt3v27q4uqlgk5.apps.googleusercontent.com";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -81,6 +82,7 @@ public class LoginFragment extends Fragment {
         mAuth=FirebaseAuth.getInstance();
         googleSign=(SignInButton)getActivity().findViewById(R.id.googleSign);
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
         mGoogleSignInClient = new GoogleApiClient.Builder(getActivity().getApplicationContext())
@@ -207,7 +209,7 @@ public class LoginFragment extends Fragment {
 
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
-        Log.d("Google", "firebaseAuthWithGoogle:" + acct.getId());
+        Log.d("Google", "firebaseAuthWithGoogle:" + acct.getIdToken());
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         mAuth.signInWithCredential(credential)
@@ -218,7 +220,7 @@ public class LoginFragment extends Fragment {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("Google", "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
+                            updateUI(user);//hi
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("Google", "signInWithCredential:failure", task.getException());

@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        FirebaseAuth.getInstance().signOut();
 
         getFragmentManager().beginTransaction()
                 .replace(R.id.container, new LoginFragment(), "loginFragment")
