@@ -72,6 +72,7 @@ public class SignUpFragment extends Fragment {
             public void onClick(View view) {
                 if (!flagCancel) {
                     flagSignUp = true;
+
                     mListener.gotoNextFragment(FragmentAction.FROM_SIGN_UP_GO_TO_LOGIN);
                 }
             }
