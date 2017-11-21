@@ -63,11 +63,26 @@
     </LinearLayout>
 
     <ImageButton
-        android:id="@+id/imageButton4"
+        android:id="@+id/imgBtnEditContact"
         android:layout_width="40dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="1dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/edit_profile" />
+
+    <ImageButton
+        android:id="@+id/imgBtnDelete"
+        android:layout_width="40dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="1dp"
+        android:layout_marginEnd="1dp"
+        android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
