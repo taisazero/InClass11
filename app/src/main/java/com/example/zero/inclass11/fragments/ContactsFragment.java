@@ -4,16 +4,25 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.zero.inclass11.Contact;
+import com.example.zero.inclass11.ContactAdapter;
+import com.example.zero.inclass11.MainActivity;
 import com.example.zero.inclass11.R;
 
 
 public class ContactsFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
+    private RecyclerView listContacts;
+    private LinearLayoutManager linearLayoutManager;
+    public ContactAdapter contactAdapter;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,6 +39,24 @@ public class ContactsFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        listContacts= getActivity().findViewById(R.id.listContacts);
+        linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        contactAdapter = new ContactAdapter(Contact.contacts, new ContactAdapter.OnItemClickListener() {
+            @Override
+            public void setOnClickDeleteListener(Contact contact, int position) {
+                Contact.contacts.remove(position);
+            }
+
+            @Override
+            public void setOnClickEditListener(Contact contact, int position) {
+
+            }
+        });
+
+        contactAdapter.notifyDataSetChanged();
+        listContacts.setLayoutManager(linearLayoutManager);
+        listContacts.setAdapter(contactAdapter);
 
 
     }
