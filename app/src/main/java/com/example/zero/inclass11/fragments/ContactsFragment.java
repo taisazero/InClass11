@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import com.example.zero.inclass11.Contact;
 import com.example.zero.inclass11.ContactAdapter;
@@ -22,6 +23,8 @@ public class ContactsFragment extends Fragment {
     private RecyclerView listContacts;
     private LinearLayoutManager linearLayoutManager;
     public ContactAdapter contactAdapter;
+    public ImageButton imgBtnEditOwnProfile;
+    public ImageButton imgBtnAddContact;
 
 
     @Override
@@ -53,6 +56,23 @@ public class ContactsFragment extends Fragment {
             @Override
             public void setOnClickEditListener(Contact contact, int position) {
                 mListener.gotoNextFragment(FragmentAction.FROM_CONTACTS_GO_TO_EDIT_CONTACT);
+            }
+        });
+
+
+        imgBtnEditOwnProfile = getView().findViewById(R.id.imgBtnEditOwnProfile);
+        imgBtnEditOwnProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.gotoNextFragment(FragmentAction.FROM_CONTACTS_GO_TO_EDIT_OWN_CONTACT);
+            }
+        });
+
+        imgBtnAddContact = getActivity().findViewById(R.id.imgBtnAddContact);
+        imgBtnAddContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.gotoNextFragment(FragmentAction.FROM_CONTACTS_GO_TO_CREATE_CONTACT);
             }
         });
 
